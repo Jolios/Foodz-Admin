@@ -18,7 +18,16 @@ export class DashboardComponent implements OnInit {
   lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June','July'];
 
   lineChartOptions = {
-    responsive: true
+    responsive: true,
+    scales:{
+      yAxes:[{
+        ticks:{
+          stepSize: 1,
+          max : 6,
+          min: 0
+        }
+      }]
+    }
   };
 
   lineChartColors: Color[] = [
@@ -33,6 +42,15 @@ export class DashboardComponent implements OnInit {
 
   public barChartOptions: ChartOptions = {
     responsive: true,
+    scales:{
+      yAxes:[{
+        ticks:{
+          stepSize: 1,
+          max : 6,
+          min: 0
+        }
+      }]
+    }
   };
   public barChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June','July'];
   public barChartType: ChartType = 'bar';
@@ -46,7 +64,7 @@ export class DashboardComponent implements OnInit {
   public barChartPlugins = [];
 
   public barChartData: ChartDataSets[] = [
-    { data: [6, 0, 0, 0, 0, 1,0], label: 'Reservations' },
+    { data: [0, 0, 0, 0, 0, 1,0], label: 'Reservations' },
   ];
   startAnimationForLineChart(chart){
       let seq: any, delays: any, durations: any;
