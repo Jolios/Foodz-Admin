@@ -36,6 +36,8 @@ import { environment } from '@environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ChartsModule } from 'ng2-charts';
+import { SignUpComponent } from './sign-up/sign-up.component';
+import { FirebaseService } from './_services/firebase.service';
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -58,14 +60,11 @@ import { ChartsModule } from 'ng2-charts';
     AppComponent,
     AdminLayoutComponent,
     LoginComponent,
+    SignUpComponent,
 
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-    
-    // provider used to create fake backend
-    fakeBackendProvider
+    FirebaseService
   ],
   bootstrap: [AppComponent]
 })

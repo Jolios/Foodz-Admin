@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
 
  import { AuthenticationService } from '@app/_services';
+ import { FirebaseService } from '@app/_services/firebase.service';
 
 @Component({ templateUrl: 'login.component.html' })
 export class LoginComponent implements OnInit {
@@ -17,17 +18,17 @@ export class LoginComponent implements OnInit {
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
         private router: Router,
-        private authenticationService: AuthenticationService
+        private firebaseService: FirebaseService
     ) { 
         // redirect to home if already logged in
-        if (this.authenticationService.currentUserValue) { 
+        if (this.firebaseService.isLoggedIn) { 
             this.router.navigate(['/']);
         }
     }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
+            email: ['', Validators.required],
             password: ['', Validators.required]
         });
 
@@ -38,24 +39,39 @@ export class LoginComponent implements OnInit {
     // convenience getter for easy access to form fields
     get f() { return this.loginForm.controls; }
 
-    onSubmit() {
-        this.submitted = true;
+    async onSignIn(){
 
-        // stop here if form is invalid
         if (this.loginForm.invalid) {
-            return;
-        }
+          return;
+      }
+    
+      this.loading = true;
+    
+      //console.log(this.f.email.value + " "+ this.f.password.value);
+      await this.firebaseService.signin(this.f.email.value,this.f.password.value,this.returnUrl)
+        .catch((e)=>{
+          this.error = e;
+          this.loading = false;
+        });
+      }
+    // onSubmit() {
+    //     this.submitted = true;
 
-        this.loading = true;
-        this.authenticationService.login(this.f.username.value, this.f.password.value)
-            .pipe(first())
-            .subscribe(
-                data => {
-                    this.router.navigate([this.returnUrl]);
-                },
-                error => {
-                    this.error = error;
-                    this.loading = false;
-                });
-    }
+    //     // stop here if form is invalid
+    //     if (this.loginForm.invalid) {
+    //         return;
+    //     }
+
+    //     this.loading = true;
+    //     this.authenticationService.login(this.f.username.value, this.f.password.value)
+    //         .pipe(first())
+    //         .subscribe(
+    //             data => {
+    //                 this.router.navigate([this.returnUrl]);
+    //             },
+    //             error => {
+    //                 this.error = error;
+    //                 this.loading = false;
+    //             });
+    // }
 }

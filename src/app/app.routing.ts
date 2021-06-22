@@ -6,6 +6,7 @@ import { LoginComponent } from './login';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthGuard } from './_helpers';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const routes: Routes =[
   {
@@ -23,6 +24,8 @@ const routes: Routes =[
     canActivate: [AuthGuard],
   },
   { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
+
      // otherwise redirect to home
       // { path: '**', redirectTo: '' }
 ];
