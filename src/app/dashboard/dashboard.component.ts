@@ -38,7 +38,7 @@ export class DashboardComponent implements OnInit {
 
   lineChartLegend = true;
   lineChartPlugins = [];
-  lineChartType = 'line';
+  lineChartType : ChartType = 'line';
 
   public barChartOptions: ChartOptions = {
     responsive: true,

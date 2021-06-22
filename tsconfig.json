@@ -20,5 +20,8 @@
         "@app/*": ["app/*"],
         "@environments/*": ["environments/*"]
     }
+  },
+  "angularCompilerOptions": {
+    "strictTemplates": true
   }
 }

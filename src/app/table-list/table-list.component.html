@@ -28,7 +28,7 @@
                                   </th>
                               </thead>
                               <tbody>
-                                  <tr>
+                                  <tr *ngFor="let restaurant of restaurants">
                                     <th scope="row" style="border-top: 0;padding-right: 1.5rem;padding-left: 1.5rem; vertical-align: middle; border-right: 0; border-left: 0;font-size: 0.825rem; white-space: nowrap; font-weight: 600; padding:0px;text-align: inherit;border-collapse: collapse;word-wrap: break-word;">
                                         <div class="media align-items-center" style="align-items: center!important; display: flex; box-sizing: border-box;font-size: 0.825rem; white-space: nowrap; font-weight: 600; padding:1rem;text-align: inherit;border-collapse: collapse;word-wrap: break-word;">
                                           <a href="javascript:void(0)" class="avatar rounded-circle mr-3" style="font-size: 1rem;
@@ -38,52 +38,20 @@
                                           color: #fff;background-color: #adb5bd;
     align-items: center;
     justify-content: center;margin-right: 1rem!important;border-radius: 50%!important;">
-                                            <img alt="Image placeholder" src="/assets/img/primavera.jpg" style="width: 100%;height: 100%;
+                                            <img alt="Image placeholder" src="{{restaurant.image}}" style="width: 100%;height: 100%;
                                             border-radius: 50%;vertical-align: middle;
     border-style: none;">
                                           </a>
                                           <div class="media-body" style="flex: 1 1;">
-                                            <span class="mb-0 text-sm" style="font-size: .875rem!important;margin-bottom: 0!important;">Primavera</span>
+                                            <span class="mb-0 text-sm" style="font-size: .875rem!important;margin-bottom: 0!important;">{{restaurant.title}}</span>
                                           </div>
                                         </div>
                                       </th>
                                       <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                        {{restaurant.description}}
                                       </td>
                                       <td class="text-primary">
-                                        <a href="www.prima.com">www.prima.com</a>
-                                      </td>
-                                      <td>
-                                        <i class="fa fa-check-circle" style="color: green;"> Approved</i>
-                                      </td>
-                                      <td >
-                                        <a href="javascript:void(0)" style="padding-left: 32%;"><i class="fa fa-times-circle" style="color: red"></i></a>
-                                      </td>
-                                  </tr>
-                                  <tr>
-                                    <th scope="row" style="padding-right: 1.5rem;padding-left: 1.5rem; vertical-align: middle; border-right: 0; border-left: 0;font-size: 0.825rem; white-space: nowrap; font-weight: 600; padding:0px;text-align: inherit;border-collapse: collapse;word-wrap: break-word;">
-                                        <div class="media align-items-center" style="align-items: center!important; display: flex; box-sizing: border-box;font-size: 0.825rem; white-space: nowrap; font-weight: 600; padding:1rem;text-align: inherit;border-collapse: collapse;word-wrap: break-word;">
-                                          <a href="javascript:void(0)" class="avatar rounded-circle mr-3" style="font-size: 1rem;
-                                          display: inline-flex;
-                                          width: 48px;
-                                          height: 48px;
-                                          color: #fff;background-color: #adb5bd;
-    align-items: center;
-    justify-content: center;margin-right: 1rem!important;border-radius: 50%!important;">
-                                            <img alt="Image placeholder" src="/assets/img/laveranda.jpg" style="width: 100%;height: 100%;
-                                            border-radius: 50%;vertical-align: middle;
-    border-style: none;">
-                                          </a>
-                                          <div class="media-body" style="flex: 1 1;">
-                                            <span class="mb-0 text-sm" style="font-size: .875rem!important;margin-bottom: 0!important;">La Veranda</span>
-                                          </div>
-                                        </div>
-                                      </th>
-                                      <td>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                      </td>
-                                      <td class="text-primary">
-                                        <a href="www.laveranda.com">www.laveranda.com</a>
+                                        <a href="{{restaurant.website}">{{restaurant.website}}</a>
                                       </td>
                                       <td>
                                         <i class="fa fa-check-circle" style="color: green;"> Approved</i>

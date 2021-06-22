@@ -35,6 +35,8 @@ import { environment } from '@environments/environment';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ChartsModule } from 'ng2-charts';
+import { RestaurantService } from './_services/restaurant.service';
+
 @NgModule({
   imports: [
     BrowserAnimationsModule,
@@ -60,6 +62,7 @@ import { ChartsModule } from 'ng2-charts';
 
   ],
   providers: [
+    RestaurantService,
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     
