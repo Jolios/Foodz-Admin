@@ -6,6 +6,7 @@ import { ReviewService } from '@app/_services/review.service';
 import { ChartDataSets, ChartOptions, ChartType } from 'chart.js';
 import * as Chartist from 'chartist';
 import { Color, Label } from 'ng2-charts';
+import { data } from 'jquery';
 
 @Component({
   selector: 'app-dashboard',
@@ -24,38 +25,66 @@ export class DashboardComponent implements OnInit {
   constructor(private userService:UserService,private restaurantService:RestaurantService,private reservationService:ReservationService,
     private reviewService:ReviewService) { }
   
+    lineChartLabels: Label[];
+    lineChartData: ChartDataSets[];
+    lineChartOptions;
+  
+    lineChartColors: Color[];
+  
+    lineChartLegend ;
+    lineChartPlugins ;
+    lineChartType : ChartType;
 
-  lineChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June','July'];
-  lineChartData: ChartDataSets[];
-  lineChartOptions = {
-    responsive: true
-  };
+    initLineChart(dataArray:number[]){
+      this.lineChartLabels = ['January', 'February', 'March', 'April', 'May', 'June','July'];
+      this.lineChartData = [
+        { data: dataArray, label: 'Number of new clients',fill:false },
+      ];
+      this.lineChartOptions = {
+      responsive: true
+      };
 
-  lineChartColors: Color[] = [
-    {
-      borderColor: 'red'
-    },
-  ];
+      this.lineChartColors = [
+      {
+        borderColor: 'red'
+      },
+      ];
 
-  lineChartLegend = true;
-  lineChartPlugins = [];
-  lineChartType : ChartType = 'line';
+      this.lineChartLegend = true;
+      this.lineChartPlugins = [];
+      this.lineChartType  = 'line';    
+  }
 
-  public barChartOptions: ChartOptions = {
-    responsive: true
-  };
-  public barChartLabels: Label[] = ['January', 'February', 'March', 'April', 'May', 'June','July'];
-  public barChartType: ChartType = 'bar';
-  barChartColors: Color[] = [
-    {
-      borderColor : "rgb(255,69,0)",
-      backgroundColor : "rgb(255,69,0)"
-    }
-  ]
-  public barChartLegend = true;
-  public barChartPlugins = [];
+  
 
-  public barChartData: ChartDataSets[];
+  barChartOptions: ChartOptions ;
+  barChartLabels: Label[] ;
+  barChartType: ChartType;
+  barChartColors: Color[];
+  barChartLegend ;
+  barChartPlugins;
+  barChartData: ChartDataSets[];
+
+  initBarChart(dataArray:number[]){
+    this.barChartOptions = {
+      responsive: true
+    };
+    this.barChartLabels = ['January', 'February', 'March', 'April', 'May', 'June','July'];
+    this.barChartType = 'bar';
+    this.barChartColors = [
+      {
+        borderColor : "rgb(255,69,0)",
+        backgroundColor : "rgb(255,69,0)"
+      }
+    ]
+    this.barChartLegend = true;
+    this.barChartPlugins = [];
+  
+    this.barChartData = [
+      { data: dataArray, label: 'Reservations' },
+    ];
+  }
+
   
   ngOnInit() {
       this.userService.getUsers().subscribe(users=>{
@@ -99,10 +128,9 @@ export class DashboardComponent implements OnInit {
             }
           }
         });
+        this.initLineChart(this.usersData);
       });
-      this.lineChartData = [
-        { data: this.usersData, label: 'Number of new clients',fill:false },
-      ];
+      
       this.reservationService.getReservations().subscribe(reservations=>{
         this.reservationsCount = reservations.length;
         var currentYear:number = new Date().getFullYear();
@@ -144,10 +172,9 @@ export class DashboardComponent implements OnInit {
             }
           }
         });
+        this.initBarChart(this.reservationsData);
       });
-      this.barChartData = [
-        { data: this.reservationsData, label: 'Reservations' },
-      ];
+      
       this.restaurantService.getRestaurant().subscribe(restaurants=>{
         this.restaurantsCount = restaurants.length;
       })
