@@ -16,9 +16,7 @@ export class TableListComponent implements OnInit {
 
   ngOnInit() {
     this.restaurantService.getRestaurant().subscribe(restaurants => {
-      console.log(restaurants);
       this.restaurants = restaurants;
-      console.log(restaurants);
     });
   }
 
