@@ -7,11 +7,11 @@ import { RouterModule } from '@angular/router';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // used to create fake backend
-import { fakeBackendProvider } from './_helpers';
+// import { fakeBackendProvider } from './_helpers';
 
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+// import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 
 import { AppComponent } from './app.component';
 
@@ -36,6 +36,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 
 import { ChartsModule } from 'ng2-charts';
 import { RestaurantService } from './_services/restaurant.service';
+import { UserService } from './_services';
 
 @NgModule({
   imports: [
@@ -63,11 +64,12 @@ import { RestaurantService } from './_services/restaurant.service';
   ],
   providers: [
     RestaurantService,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    UserService
+    // { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    // { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     
     // provider used to create fake backend
-    fakeBackendProvider
+    // fakeBackendProvider
   ],
   bootstrap: [AppComponent]
 })
